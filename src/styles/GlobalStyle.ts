@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 type Props = {
   font: string
+  darkmode: string
 }
 
 export const darkBlue = '#2B3844' // - Dark Blue (Dark Mode Elements)
@@ -17,10 +18,13 @@ const GlobalStyle = createGlobalStyle<Props>`
     padding: 0;
     box-sizing: border-box;
     font-family: ${(props) => props.font};
+    background-color: ${(props) =>
+      props.darkmode === 'true' ? veryDarkBlue : veryLightGrey};
+    color: ${(props) => (props.darkmode === 'true' ? white : black)};
   }
 
   .container {
-    max-width: 1440px;
+    max-width: 1280px;
     margin: 0 auto;
   }
 `
