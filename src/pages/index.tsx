@@ -26,6 +26,7 @@ export type Country = {
   flags: {
     png: string
   }
+  alt: string
 }
 
 type Props = {

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { darkBlue, lightGrey, white } from './GlobalStyle'
+import Link from 'next/link'
 
 type Props = {
   darkmode: string
@@ -112,4 +113,104 @@ export const AllCardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 75px;
+`
+
+export const BackContainer = styled(Link)<Props>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 136px;
+  height: 40px;
+  padding: 10px 40px 10px 32px;
+  margin-top: 80px;
+  background-color: ${(props) =>
+    props.darkmode === 'true' ? darkBlue : white};
+  border-radius: 6px;
+  filter: drop-shadow(0 0px 7px rgba(0, 0, 0, 0.2931));
+
+  img {
+    width: 14px;
+    height: 14px;
+    background-color: transparent;
+  }
+
+  span {
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 200;
+  }
+`
+
+export const DetailsCountryContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 80px;
+
+  h3 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 24px;
+  }
+`
+
+export const ImageContainerDetails = styled.div`
+  width: 560px;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 6px;
+`
+
+export const ContainerDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 574px;
+`
+
+export const MinDetails = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 70px;
+`
+
+export const Details = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  span {
+    font-size: 16px;
+    font-weight: 300;
+
+    span {
+      font-weight: 200;
+      margin-right: 8px;
+    }
+  }
+`
+
+export const BorderCountriesContainer = styled.div<Props>`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  h4 {
+    font-size: 16px;
+    font-weight: 300;
+    margin-right: 42px;
+  }
+
+  span {
+    font-size: 14px;
+    font-weight: 200;
+    padding: 6px 28px;
+    margin-right: 10px;
+    background-color: ${(props) =>
+      props.darkmode === 'true' ? darkBlue : white};
+    filter: drop-shadow(0 0px 7px rgba(0, 0, 0, 0.2931));
+  }
 `
