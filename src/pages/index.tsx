@@ -53,7 +53,7 @@ const Home = ({ countries }: Props) => {
     } else {
       setDispayCountries(countries)
     }
-    if (regionFilter !== '') {
+    if (regionFilter !== '' && filter === '') {
       const filteredCountries = countries.filter((country) =>
         country.region.toLowerCase().match(regionFilter.toLowerCase())
       )
