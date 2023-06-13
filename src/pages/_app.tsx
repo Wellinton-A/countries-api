@@ -14,13 +14,13 @@ export default function App({ Component, pageProps }: AppProps) {
   if (router.pathname === '/_error') return <Component {...pageProps} />
 
   return (
-    <DarkModeProvider>
-      <>
-        <GlobalStyle font={font} />
+    <>
+      <GlobalStyle font={font} />
+      <DarkModeProvider>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </>
-    </DarkModeProvider>
+      </DarkModeProvider>
+    </>
   )
 }
