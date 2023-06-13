@@ -13,6 +13,7 @@ import arrowDownDark from '../assets/icons8-down-white24.png'
 
 import * as S from '@/styles/style'
 import Card from '@/components/Country-Card'
+import { Console } from 'console'
 
 export const font = "'Nunito Sans', sans-serif"
 
@@ -34,6 +35,7 @@ type Props = {
 
 const Home = ({ countries }: Props) => {
   const [filter, setFilter] = useState<string>('')
+  const [regionFilter, setRegionFilter] = useState<string>('')
   const [selectToggle, setSelectToggle] = useState<boolean>(false)
   const [displayCountries, setDispayCountries] = useState<Country[]>(countries)
 
@@ -45,6 +47,7 @@ const Home = ({ countries }: Props) => {
 
   useEffect(() => {
     if (filter !== '') {
+      setDispayCountries(countries)
       const filteredCountries = countries.filter((country) =>
         country.name.common.toLowerCase().match(filter.toLowerCase())
       )
@@ -52,9 +55,25 @@ const Home = ({ countries }: Props) => {
     } else {
       setDispayCountries(countries)
     }
-  }, [filter, countries])
+    if (regionFilter !== '') {
+      const filteredCountries = countries.filter((country) =>
+        country.region.toLowerCase().match(regionFilter.toLowerCase())
+      )
+      setDispayCountries(filteredCountries)
+      setFilter('')
+    }
+  }, [filter, countries, regionFilter])
 
-  console.log(displayCountries)
+  const handleRegionFilter = (e: React.MouseEvent<HTMLSpanElement>) => {
+    const target = e.target as HTMLSpanElement
+    const region = target.firstChild
+    if (region instanceof Text) {
+      setRegionFilter(region.data)
+    }
+    setSelectToggle(false)
+  }
+
+  console.log(regionFilter)
 
   return (
     <>
@@ -117,11 +136,11 @@ const Home = ({ countries }: Props) => {
                 selecttoggle={selectToggle.toString()}
                 darkmode={darkMode.toString()}
               >
-                <span>Africa</span>
-                <span>America</span>
-                <span>Asia</span>
-                <span>Europe</span>
-                <span>Oceania</span>
+                <span onClick={handleRegionFilter}>Africa</span>
+                <span onClick={handleRegionFilter}>America</span>
+                <span onClick={handleRegionFilter}>Asia</span>
+                <span onClick={handleRegionFilter}>Europe</span>
+                <span onClick={handleRegionFilter}>Oceania</span>
               </S.OptionsDiv>
             </S.FilterByRegionContainer>
           </S.FiltersContainerPrincipal>
