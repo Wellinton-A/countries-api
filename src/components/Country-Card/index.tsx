@@ -4,8 +4,6 @@ import { DarkModeContext } from '@/context/darkMode.context'
 
 import { Country } from '@/pages'
 
-const flag = 'https://flagcdn.com/w320/jo.png'
-
 type Props = {
   country: Country
 }
