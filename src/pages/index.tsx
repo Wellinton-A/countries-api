@@ -70,8 +70,6 @@ const Home = ({ countries }: Props) => {
     setSelectToggle(false)
   }
 
-  console.log(regionFilter)
-
   return (
     <>
       <GlobalStyle darkmode={darkMode.toString()} font={font} />

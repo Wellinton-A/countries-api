@@ -43,6 +43,7 @@ export const SearchContainer = styled.div<Props>`
 `
 
 export const FilterByRegionContainer = styled.div`
+  position: relative;
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -75,6 +76,8 @@ export const SelectContainer = styled.div<Props>`
 `
 
 export const OptionsDiv = styled.div<Props>`
+  position: absolute;
+  top: 60px;
   width: 100%;
   height: 164px;
   padding: 16px 24px;
@@ -85,6 +88,7 @@ export const OptionsDiv = styled.div<Props>`
     props.darkmode === 'true' ? darkBlue : white};
   border-radius: 5px;
   filter: drop-shadow(0 2px 9px rgba(0, 0, 0, 0.0532));
+  z-index: 1;
 
   span {
     background-color: transparent;

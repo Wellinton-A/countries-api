@@ -14,7 +14,11 @@ const Card = ({ country }: Props) => {
   const { population, name, region, capital, flags } = country
 
   return (
-    <CardContainer darkmode={darkMode.toString()}>
+    <CardContainer
+      href={`/${name.common}`}
+      title="Click to see more details about the country"
+      darkmode={darkMode.toString()}
+    >
       <ImageContainer style={{ backgroundImage: `url(${flags.png})` }} />
       <InfoContainer>
         <div>

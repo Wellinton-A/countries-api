@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle<Props>`
     background-color: ${(props) =>
       props.darkmode === 'true' ? veryDarkBlue : veryLightGrey};
     color: ${(props) => (props.darkmode === 'true' ? white : black)};
+    text-decoration: none;
   }
 
   .container {

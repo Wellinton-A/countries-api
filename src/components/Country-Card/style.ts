@@ -1,11 +1,12 @@
 import { darkBlue, white } from '@/styles/GlobalStyle'
+import Link from 'next/link'
 import styled from 'styled-components'
 
 type Props = {
   darkmode: string
 }
 
-export const CardContainer = styled.div<Props>`
+export const CardContainer = styled(Link)<Props>`
   width: 264px;
   height: 336px;
   border-radius: 5px;
