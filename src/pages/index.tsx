@@ -13,7 +13,6 @@ import arrowDownDark from '../assets/icons8-down-white24.png'
 
 import * as S from '@/styles/style'
 import Card from '@/components/Country-Card'
-import { Console } from 'console'
 
 export const font = "'Nunito Sans', sans-serif"
 
@@ -47,7 +46,6 @@ const Home = ({ countries }: Props) => {
 
   useEffect(() => {
     if (filter !== '') {
-      setDispayCountries(countries)
       const filteredCountries = countries.filter((country) =>
         country.name.common.toLowerCase().match(filter.toLowerCase())
       )
