@@ -197,6 +197,7 @@ export const BorderCountriesContainer = styled.div<Props>`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  row-gap: 8px;
 
   h4 {
     font-size: 16px;

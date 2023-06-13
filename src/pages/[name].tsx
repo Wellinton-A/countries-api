@@ -68,6 +68,8 @@ const CountrySDetails = ({ country }: Props) => {
   const router = useRouter()
   const route = router.query.name
 
+  console.log(country)
+
   return (
     <>
       <GlobalStyle darkmode={darkMode.toString()} font={font} />
@@ -100,7 +102,8 @@ const CountrySDetails = ({ country }: Props) => {
                     Native Name: <span>{nativeName}</span>
                   </span>
                   <span>
-                    Population: <span>{population}</span>
+                    Population:{' '}
+                    <span>{population.toLocaleString('en-US')}</span>
                   </span>
                   <span>
                     Region: <span>{region}</span>

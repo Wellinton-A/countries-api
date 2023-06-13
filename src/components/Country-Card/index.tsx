@@ -26,7 +26,7 @@ const Card = ({ country }: Props) => {
         <div>
           <h3>{name.common}</h3>
           <span>
-            Population: <span>{population}</span>
+            Population: <span>{population.toLocaleString('en-Us')}</span>
           </span>
           <span>
             Region: <span>{region}</span>
