@@ -8,11 +8,10 @@ import DocumentNext, {
   DocumentInitialProps
 } from 'next/document'
 
-export function Document() {
+export default function Document() {
   return (
     <Html lang="en">
-      <Head />
-      {/* </Head> */}
+      <Head></Head>
       <body>
         <Main />
         <NextScript />
@@ -20,7 +19,7 @@ export function Document() {
     </Html>
   )
 }
-export default class MyDocument extends DocumentNext {
+export class MyDocument extends DocumentNext {
   static async getInitialProps(
     ctx: DocumentContext
   ): Promise<DocumentInitialProps> {
