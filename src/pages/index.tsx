@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { DarkModeContext } from '@/context/darkMode.context'
 
@@ -35,8 +35,26 @@ type Props = {
 const Home = ({ countries }: Props) => {
   const [filter, setFilter] = useState<string>('')
   const [selectToggle, setSelectToggle] = useState<boolean>(false)
+  const [displayCountries, setDispayCountries] = useState<Country[]>(countries)
 
   const { darkMode } = useContext(DarkModeContext)
+
+  const handleFilterInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(e.target.value)
+  }
+
+  useEffect(() => {
+    if (filter !== '') {
+      const filteredCountries = countries.filter((country) =>
+        country.name.common.toLowerCase().match(filter.toLowerCase())
+      )
+      setDispayCountries(filteredCountries)
+    } else {
+      setDispayCountries(countries)
+    }
+  }, [filter, countries])
+
+  console.log(displayCountries)
 
   return (
     <>
@@ -65,7 +83,12 @@ const Home = ({ countries }: Props) => {
                   height={18}
                 />
               )}
-              <input type="text" placeholder="Search for a country…" />
+              <input
+                onChange={handleFilterInput}
+                type="text"
+                placeholder="Search for a country…"
+                value={filter}
+              />
             </S.SearchContainer>
             <S.FilterByRegionContainer>
               <S.SelectContainer darkmode={darkMode.toString()}>
@@ -103,7 +126,7 @@ const Home = ({ countries }: Props) => {
             </S.FilterByRegionContainer>
           </S.FiltersContainerPrincipal>
           <S.AllCardContainer>
-            {countries.map((country: Country) => (
+            {displayCountries.map((country: Country) => (
               <Card key={country.name.common} country={country} />
             ))}
           </S.AllCardContainer>
