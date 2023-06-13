@@ -18,7 +18,6 @@ const Navbar = () => {
   return (
     <S.HeaderStyled darkmode={darkMode.toString()}>
       <S.NavbarStyled
-        className="container"
         onClick={handleToggleTheme}
         darkmode={darkMode.toString()}
       >

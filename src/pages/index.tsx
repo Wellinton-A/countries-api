@@ -18,7 +18,7 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
-        <div className="container">Ola mundo</div>
+        <div></div>
       </main>
     </>
   )

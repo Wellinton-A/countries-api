@@ -21,11 +21,6 @@ const GlobalStyle = createGlobalStyle<Props>`
     background-color: ${(props) =>
       props.darkmode === 'true' ? veryDarkBlue : veryLightGrey};
   }
-
-  .container {
-    max-width: 1440px;
-    margin: 0 auto;
-  }
 `
 
 export default GlobalStyle
