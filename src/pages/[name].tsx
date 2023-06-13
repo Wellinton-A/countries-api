@@ -115,19 +115,19 @@ const CountrySDetails = ({ country }: Props) => {
                 <S.Details>
                   <span>
                     Top Level Domain:{' '}
-                    {topLevelDomain.map((domain: string) => (
+                    {topLevelDomain?.map((domain: string) => (
                       <span key={domain}>{domain}</span>
                     ))}
                   </span>
                   <span>
                     Currencies:{' '}
-                    {currencies.map((curr) => (
+                    {currencies?.map((curr) => (
                       <span key={curr.code}>{curr.name}</span>
                     ))}
                   </span>
                   <span>
                     Languages:{' '}
-                    {languages.map((lang) => (
+                    {languages?.map((lang) => (
                       <span key={lang.name}>{lang.name}</span>
                     ))}
                   </span>
@@ -135,7 +135,7 @@ const CountrySDetails = ({ country }: Props) => {
               </S.MinDetails>
               <S.BorderCountriesContainer darkmode={darkMode.toString()}>
                 <h4>Border Countries:</h4>
-                {borders.map((bord) => (
+                {borders?.map((bord) => (
                   <span key={bord}>{bord}</span>
                 ))}
               </S.BorderCountriesContainer>
