@@ -13,8 +13,6 @@ export const HeaderStyled = styled.header<Props>`
 `
 
 export const NavbarStyled = styled.nav<Props>`
-  max-width: 1440px;
-  margin: 0 auto;
   background-color: ${(props) =>
     props.darkmode === 'true' ? darkBlue : white};
   display: flex;
