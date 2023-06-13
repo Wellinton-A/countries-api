@@ -60,7 +60,6 @@ const Home = ({ countries }: Props) => {
         country.region.toLowerCase().match(regionFilter.toLowerCase())
       )
       setDispayCountries(filteredCountries)
-      setFilter('')
     }
   }, [filter, countries, regionFilter])
 
