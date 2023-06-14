@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -23,6 +23,7 @@ type Props = {
 }
 
 const CountrySDetails = ({ data }: Props) => {
+  const [route, setRoute] = useState<string | string[] | undefined>()
   const { darkMode } = useContext(DarkModeContext)
   const {
     name,
@@ -39,7 +40,11 @@ const CountrySDetails = ({ data }: Props) => {
   } = data
 
   const router = useRouter()
-  const route = router.query.name
+  const routeName = router.query.name
+
+  useEffect(() => {
+    setRoute(routeName)
+  }, [routeName])
 
   return (
     <>
