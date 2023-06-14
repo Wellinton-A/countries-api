@@ -210,20 +210,20 @@ export const DetailsCountryContainer = styled.div`
       font-size: 22px;
     }
   }
-`
 
-export const ImageContainerDetails = styled.div`
-  width: 560px;
-  height: 400px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 6px;
+  img {
+    width: 560px;
+    height: 400px;
+    border-radius: 6px;
 
-  @media (max-width: 767px) {
-    width: 320px;
-    height: 229px;
+    @media (max-width: 767px) {
+      width: 320px;
+      height: 229px;
+    }
   }
 `
+
+export const ImageContainerDetails = styled.div``
 
 export const ContainerDetails = styled.div`
   display: flex;

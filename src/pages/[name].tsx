@@ -78,8 +78,12 @@ const CountrySDetails = ({ data, borderCountries }: Props) => {
             <span>Back</span>
           </S.BackContainer>
           <S.DetailsCountryContainer>
-            <S.ImageContainerDetails
-              style={{ backgroundImage: `url(${flags.png})` }}
+            <Image
+              width={560}
+              height={400}
+              sizes="(max-width: 767px) 320px, 229px"
+              src={flags.png}
+              alt={`${name} flag`}
             />
             <S.ContainerDetails>
               <h3>{name}</h3>
