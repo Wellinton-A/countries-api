@@ -19,10 +19,10 @@ import fs from 'fs/promises'
 import process from 'process'
 
 type Props = {
-  country: CountryData
+  data: CountryData
 }
 
-const CountrySDetails = ({ country }: Props) => {
+const CountrySDetails = ({ data }: Props) => {
   const { darkMode } = useContext(DarkModeContext)
   const {
     name,
@@ -36,12 +36,10 @@ const CountrySDetails = ({ country }: Props) => {
     languages,
     borders,
     flags
-  } = country
+  } = data
 
   const router = useRouter()
   const route = router.query.name
-
-  console.log(country)
 
   return (
     <>
@@ -125,20 +123,32 @@ const CountrySDetails = ({ country }: Props) => {
 
 export default CountrySDetails
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps<{
+  data: CountryData
+}> = async (context) => {
   const params = context.params as ParsedUrlQuery
   const route = params.name
 
   const filePath = path.join(process.cwd(), 'data', 'data.json')
   const jsonData = await fs.readFile(filePath)
   const jsonString: string = jsonData.toString('utf8')
-  const data = JSON.parse(jsonString)
+  const dataJson = JSON.parse(jsonString)
 
-  const country = data.filter((country: CountryData) => country.name === route)
+  const country: CountryData[] = dataJson.filter(
+    (country: CountryData) => country.name === route
+  )
+
+  const data = country[0]
+
+  if (data === undefined) {
+    return {
+      notFound: true
+    }
+  }
 
   return {
     props: {
-      country: country[0]
+      data
     }
   }
 }
