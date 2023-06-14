@@ -187,6 +187,7 @@ export const DetailsCountryContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   margin-top: 80px;
+  margin-bottom: 80px;
 
   h3 {
     font-size: 32px;
