@@ -25,14 +25,15 @@ const Card = ({ country }: Props) => {
       <InfoContainer>
         <div>
           <h3>{name}</h3>
-          <span>
-            Population: <span>{population.toLocaleString()}</span>
+          <span suppressHydrationWarning>
+            Population:{' '}
+            <span suppressHydrationWarning>{population.toLocaleString()}</span>
           </span>
-          <span>
-            Region: <span>{region}</span>
+          <span suppressHydrationWarning>
+            Region: <span suppressHydrationWarning>{region}</span>
           </span>
-          <span>
-            Capital: <span>{capital}</span>
+          <span suppressHydrationWarning>
+            Capital: <span suppressHydrationWarning>{capital}</span>
           </span>
         </div>
       </InfoContainer>

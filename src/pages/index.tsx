@@ -172,7 +172,7 @@ const Home = ({ countries }: Props) => {
 
 export default Home
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const filePath = path.join(process.cwd(), 'data', 'data.json')
   const jsonData = await fs.readFile(filePath)
   const jsonString: string = jsonData.toString('utf8')
