@@ -4111,7 +4111,7 @@
     "independent": true
   },
   {
-    "name": "Czech Republic",
+    "name": "Czechia",
     "topLevelDomain": [".cz"],
     "alpha2Code": "CZ",
     "alpha3Code": "CZE",
@@ -5018,7 +5018,7 @@
     "independent": true
   },
   {
-    "name": "Falkland Islands (Malvinas)",
+    "name": "Falkland Islands",
     "topLevelDomain": [".fk"],
     "alpha2Code": "FK",
     "alpha3Code": "FLK",
@@ -12388,7 +12388,7 @@
     "independent": true
   },
   {
-    "name": "Russian Federation",
+    "name": "Russia",
     "topLevelDomain": [".ru"],
     "alpha2Code": "RU",
     "alpha3Code": "RUS",
@@ -12816,7 +12816,7 @@
     "independent": true
   },
   {
-    "name": "Saint Martin (French part)",
+    "name": "Saint Martin",
     "topLevelDomain": [".mf", ".fr", ".gp"],
     "alpha2Code": "MF",
     "alpha3Code": "MAF",
@@ -15993,7 +15993,7 @@
     "independent": true
   },
   {
-    "name": "United Kingdom of Great Britain and Northern Ireland",
+    "name": "United Kingdom",
     "topLevelDomain": [".uk"],
     "alpha2Code": "GB",
     "alpha3Code": "GBR",
@@ -16058,7 +16058,7 @@
     "independent": true
   },
   {
-    "name": "United States of America",
+    "name": "United States",
     "topLevelDomain": [".us"],
     "alpha2Code": "US",
     "alpha3Code": "USA",

@@ -14,30 +14,49 @@ import arrowDownDark from '../assets/icons8-down-white24.png'
 import * as S from '@/styles/style'
 import Card from '@/components/Country-Card'
 
+import path from 'path'
+import fs from 'fs/promises'
+import process from 'process'
+
 export const font = "'Nunito Sans', sans-serif"
 
-export type Country = {
-  name: {
-    common: string
-  }
-  population: number
+export type CountryData = {
+  name: string
+  nativeName: string
   region: string
-  capital: string[]
+  subregion: string
+  capital: string
+  population: number
+  topLevelDomain: string[]
+  currencies: [
+    {
+      code: string
+      name: string
+      symbol: string
+    }
+  ]
+  languages: [
+    {
+      name: string
+    }
+  ]
+  borders: string[]
   flags: {
+    svg: string
     png: string
   }
-  alt: string
 }
 
 type Props = {
-  countries: Country[]
+  countries: CountryData[]
 }
 
 const Home = ({ countries }: Props) => {
   const [filter, setFilter] = useState<string>('')
   const [regionFilter, setRegionFilter] = useState<string>('')
   const [selectToggle, setSelectToggle] = useState<boolean>(false)
-  const [displayCountries, setDispayCountries] = useState<Country[]>(countries)
+  const [displayCountries, setDispayCountries] =
+    useState<CountryData[]>(countries)
 
   const { darkMode } = useContext(DarkModeContext)
 
@@ -48,7 +67,7 @@ const Home = ({ countries }: Props) => {
   useEffect(() => {
     if (filter !== '') {
       const filteredCountries = countries.filter((country) =>
-        country.name.common.toLowerCase().match(filter.toLowerCase())
+        country.name.toLowerCase().match(filter.toLowerCase())
       )
       setDispayCountries(filteredCountries)
     } else {
@@ -141,8 +160,8 @@ const Home = ({ countries }: Props) => {
             </S.FilterByRegionContainer>
           </S.FiltersContainerPrincipal>
           <S.AllCardContainer>
-            {displayCountries.map((country: Country) => (
-              <Card key={country.name.common} country={country} />
+            {displayCountries.map((country: CountryData) => (
+              <Card key={country.name} country={country} />
             ))}
           </S.AllCardContainer>
         </div>
@@ -154,8 +173,10 @@ const Home = ({ countries }: Props) => {
 export default Home
 
 export const getStaticProps = async () => {
-  const result = await fetch('https://restcountries.com/v3.1/all')
-  const data = await result.json()
+  const filePath = path.join(process.cwd(), 'data', 'data.json')
+  const jsonData = await fs.readFile(filePath)
+  const jsonString: string = jsonData.toString('utf8')
+  const data = JSON.parse(jsonString)
 
   return {
     props: {

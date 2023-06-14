@@ -6,7 +6,7 @@ import { GetServerSideProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 
 import { DarkModeContext } from '@/context/darkMode.context'
-import { font } from '.'
+import { CountryData, font } from '.'
 
 import arrowLeftLight from '../assets/icons8-left-arrow-black50.png'
 import arrowLeftDark from '../assets/icons8-left-arrow-white50.png'
@@ -17,33 +17,6 @@ import * as S from '../styles/style'
 import path from 'path'
 import fs from 'fs/promises'
 import process from 'process'
-
-type CountryData = {
-  name: string
-  nativeName: string
-  region: string
-  subregion: string
-  capital: string
-  population: number
-  topLevelDomain: string[]
-  currencies: [
-    {
-      code: string
-      name: string
-      symbol: string
-    }
-  ]
-  languages: [
-    {
-      name: string
-    }
-  ]
-  borders: string[]
-  flags: {
-    svg: string
-    png: string
-  }
-}
 
 type Props = {
   country: CountryData

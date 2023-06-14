@@ -2,10 +2,10 @@ import { useContext } from 'react'
 import { CardContainer, ImageContainer, InfoContainer } from './style'
 import { DarkModeContext } from '@/context/darkMode.context'
 
-import { Country } from '@/pages'
+import { CountryData } from '@/pages'
 
 type Props = {
-  country: Country
+  country: CountryData
 }
 
 const Card = ({ country }: Props) => {
@@ -13,7 +13,7 @@ const Card = ({ country }: Props) => {
 
   const { population, name, region, capital, flags } = country
 
-  const route = name.common
+  const route = name
 
   return (
     <CardContainer
@@ -24,9 +24,9 @@ const Card = ({ country }: Props) => {
       <ImageContainer style={{ backgroundImage: `url(${flags.png})` }} />
       <InfoContainer>
         <div>
-          <h3>{name.common}</h3>
+          <h3>{name}</h3>
           <span>
-            Population: <span>{population.toLocaleString('en-Us')}</span>
+            Population: <span>{population.toLocaleString()}</span>
           </span>
           <span>
             Region: <span>{region}</span>
