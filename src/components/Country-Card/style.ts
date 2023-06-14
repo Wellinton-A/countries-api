@@ -13,14 +13,11 @@ export const CardContainer = styled(Link)<Props>`
   background-color: ${(props) =>
     props.darkmode === 'true' ? darkBlue : white};
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.0562));
-`
 
-export const ImageContainer = styled.div`
-  width: 100%;
-  height: 160px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 5px 5px 0 0;
+  img {
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+  }
 `
 
 export const InfoContainer = styled.div`

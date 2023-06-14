@@ -1,8 +1,9 @@
 import { useContext } from 'react'
-import { CardContainer, ImageContainer, InfoContainer } from './style'
+import { CardContainer, InfoContainer } from './style'
 import { DarkModeContext } from '@/context/darkMode.context'
 
 import { CountryData } from '@/pages'
+import Image from 'next/image'
 
 type Props = {
   country: CountryData
@@ -21,7 +22,7 @@ const Card = ({ country }: Props) => {
       title="Click to see more details about the country"
       darkmode={darkMode.toString()}
     >
-      <ImageContainer style={{ backgroundImage: `url(${flags.png})` }} />
+      <Image width={264} height={160} src={flags.png} alt={`${name} flag`} />
       <InfoContainer>
         <div>
           <h3>{name}</h3>
