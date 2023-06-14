@@ -17,7 +17,6 @@ import * as S from '../styles/style'
 import path from 'path'
 import fs from 'fs/promises'
 import process from 'process'
-import Link from 'next/link'
 
 type Props = {
   data: CountryData
@@ -48,7 +47,7 @@ const CountrySDetails = ({ data, borderCountries }: Props) => {
     setRoute(routeName)
   }, [routeName])
 
-  const bordRoute = (bord): string => {
+  const bordRoute = (bord: string): string | undefined => {
     if (borderCountries) {
       for (let i = 0; i < borderCountries.length; i++) {
         if (borderCountries[i].alpha3Code === bord) {
