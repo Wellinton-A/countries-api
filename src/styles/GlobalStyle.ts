@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle<Props>`
     max-width: 1280px;
     margin: 0 auto;
 
-    @media (max-width: 767px) {
+    @media (max-width: 1300px) {
       max-width: 90%;
     }
   }

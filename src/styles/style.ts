@@ -11,6 +11,10 @@ export const FiltersContainerPrincipal = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 14px;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `
 
 export const SearchContainer = styled.div<Props>`
@@ -41,6 +45,11 @@ export const SearchContainer = styled.div<Props>`
       color: ${(props) => (props.darkmode === 'true' ? white : lightGrey)};
     }
   }
+
+  @media (max-width: 767px) {
+    margin-top: 24px;
+    width: 343px;
+  }
 `
 
 export const FilterByRegionContainer = styled.div`
@@ -52,6 +61,10 @@ export const FilterByRegionContainer = styled.div`
   margin-top: 48px;
   font-size: 14px;
   font-weight: 400;
+
+  @media (max-width: 767px) {
+    margin-top: 40px;
+  }
 `
 
 export const SelectContainer = styled.div<Props>`
@@ -113,6 +126,23 @@ export const AllCardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 75px;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 export const BackContainer = styled(Link)<Props>`
@@ -139,6 +169,16 @@ export const BackContainer = styled(Link)<Props>`
     font-size: 16px;
     font-weight: 200;
   }
+
+  @media (max-width: 767px) {
+    width: 104px;
+    height: 32px;
+    padding: 7px 24px;
+
+    span {
+      font-size: 14px;
+    }
+  }
 `
 
 export const DetailsCountryContainer = styled.div`
@@ -153,6 +193,23 @@ export const DetailsCountryContainer = styled.div`
     font-weight: 800;
     margin-bottom: 24px;
   }
+
+  @media (max-width: 1280px) {
+    flex-direction: column;
+
+    h3 {
+      margin-top: 44px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+
+    h3 {
+      margin-top: 44px;
+      font-size: 22px;
+    }
+  }
 `
 
 export const ImageContainerDetails = styled.div`
@@ -161,6 +218,11 @@ export const ImageContainerDetails = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 6px;
+
+  @media (max-width: 767px) {
+    width: 320px;
+    height: 229px;
+  }
 `
 
 export const ContainerDetails = styled.div`
@@ -168,6 +230,10 @@ export const ContainerDetails = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 574px;
+
+  @media (max-width: 767px) {
+    width: 320px;
+  }
 `
 
 export const MinDetails = styled.div`
@@ -175,6 +241,11 @@ export const MinDetails = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 70px;
+
+  @media (max-width: 767px) {
+    gap: 32px;
+    flex-direction: column;
+  }
 `
 
 export const Details = styled.div`
@@ -189,6 +260,12 @@ export const Details = styled.div`
     span {
       font-weight: 200;
       margin-right: 8px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    span {
+      font-size: 14px;
     }
   }
 `
@@ -213,5 +290,11 @@ export const BorderCountriesContainer = styled.div<Props>`
     background-color: ${(props) =>
       props.darkmode === 'true' ? darkBlue : white};
     filter: drop-shadow(0 0px 7px rgba(0, 0, 0, 0.2931));
+  }
+
+  @media (max-width: 767px) {
+    span {
+      font-size: 12px;
+    }
   }
 `

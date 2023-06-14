@@ -26,6 +26,12 @@ export const NavbarStyled = styled.nav<Props>`
     font-size: 24px;
     font-weight: 800;
   }
+
+  @media (max-width: 767px) {
+    h1 {
+      font-size: 14px;
+    }
+  }
 `
 
 export const ThemeToggleContainer = styled.div`
@@ -44,5 +50,11 @@ export const ThemeToggleContainer = styled.div`
 
   img {
     background-color: transparent;
+  }
+
+  @media (max-width: 767px) {
+    span {
+      font-size: 12px;
+    }
   }
 `
