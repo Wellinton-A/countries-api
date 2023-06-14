@@ -49,6 +49,9 @@ const CountrySDetails = ({ data }: Props) => {
   return (
     <>
       <GlobalStyle darkmode={darkMode.toString()} font={font} />
+      <Head>
+        <title>Details {route}</title>
+      </Head>
       <main>
         <div className="container">
           <S.BackContainer

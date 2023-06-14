@@ -64,6 +64,15 @@ const Home = ({ countries }: Props) => {
     setFilter(e.target.value)
   }
 
+  const handleRegionFilter = (e: React.MouseEvent<HTMLSpanElement>) => {
+    const target = e.target as HTMLSpanElement
+    const region = target.firstChild
+    if (region instanceof Text) {
+      setRegionFilter(region.data)
+    }
+    setSelectToggle(false)
+  }
+
   useEffect(() => {
     if (filter !== '') {
       const filteredCountries = countries.filter((country) =>
@@ -80,15 +89,6 @@ const Home = ({ countries }: Props) => {
       setDispayCountries(filteredCountries)
     }
   }, [filter, countries, regionFilter])
-
-  const handleRegionFilter = (e: React.MouseEvent<HTMLSpanElement>) => {
-    const target = e.target as HTMLSpanElement
-    const region = target.firstChild
-    if (region instanceof Text) {
-      setRegionFilter(region.data)
-    }
-    setSelectToggle(false)
-  }
 
   return (
     <>
@@ -172,7 +172,7 @@ const Home = ({ countries }: Props) => {
 
 export default Home
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const filePath = path.join(process.cwd(), 'data', 'data.json')
   const jsonData = await fs.readFile(filePath)
   const jsonString: string = jsonData.toString('utf8')
