@@ -281,16 +281,16 @@ export const BorderCountriesContainer = styled.div<Props>`
     font-weight: 300;
     margin-right: 42px;
   }
+`
 
-  span {
-    font-size: 14px;
-    font-weight: 200;
-    padding: 6px 28px;
-    margin-right: 10px;
-    background-color: ${(props) =>
-      props.darkmode === 'true' ? darkBlue : white};
-    filter: drop-shadow(0 0px 7px rgba(0, 0, 0, 0.2931));
-  }
+export const LinkBorder = styled(Link)<Props>`
+  font-size: 14px;
+  font-weight: 200;
+  padding: 6px 28px;
+  margin-right: 10px;
+  background-color: ${(props) =>
+    props.darkmode === 'true' ? darkBlue : white};
+  filter: drop-shadow(0 0px 7px rgba(0, 0, 0, 0.2931));
 
   @media (max-width: 767px) {
     span {

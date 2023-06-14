@@ -45,6 +45,7 @@ export type CountryData = {
     svg: string
     png: string
   }
+  alpha3Code: string
 }
 
 type Props = {

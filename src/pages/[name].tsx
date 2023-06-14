@@ -17,12 +17,14 @@ import * as S from '../styles/style'
 import path from 'path'
 import fs from 'fs/promises'
 import process from 'process'
+import Link from 'next/link'
 
 type Props = {
   data: CountryData
+  borderCountries: CountryData[] | null
 }
 
-const CountrySDetails = ({ data }: Props) => {
+const CountrySDetails = ({ data, borderCountries }: Props) => {
   const [route, setRoute] = useState<string | string[] | undefined>()
   const { darkMode } = useContext(DarkModeContext)
   const {
@@ -45,6 +47,16 @@ const CountrySDetails = ({ data }: Props) => {
   useEffect(() => {
     setRoute(routeName)
   }, [routeName])
+
+  const bordRoute = (bord): string => {
+    if (borderCountries) {
+      for (let i = 0; i < borderCountries.length; i++) {
+        if (borderCountries[i].alpha3Code === bord) {
+          return borderCountries[i].name
+        }
+      }
+    }
+  }
 
   return (
     <>
@@ -115,7 +127,13 @@ const CountrySDetails = ({ data }: Props) => {
               <S.BorderCountriesContainer darkmode={darkMode.toString()}>
                 <h4>Border Countries:</h4>
                 {borders?.map((bord) => (
-                  <span key={bord}>{bord}</span>
+                  <S.LinkBorder
+                    href={`/${bordRoute(bord)}`}
+                    darkmode={darkMode.toString()}
+                    key={bord}
+                  >
+                    {bord}
+                  </S.LinkBorder>
                 ))}
               </S.BorderCountriesContainer>
             </S.ContainerDetails>
@@ -130,6 +148,7 @@ export default CountrySDetails
 
 export const getServerSideProps: GetServerSideProps<{
   data: CountryData
+  borderCountries: CountryData[]
 }> = async (context) => {
   const params = context.params as ParsedUrlQuery
   const route = params.name
@@ -137,7 +156,7 @@ export const getServerSideProps: GetServerSideProps<{
   const filePath = path.join(process.cwd(), 'data', 'data.json')
   const jsonData = await fs.readFile(filePath)
   const jsonString: string = jsonData.toString('utf8')
-  const dataJson = JSON.parse(jsonString)
+  const dataJson: CountryData[] = JSON.parse(jsonString)
 
   const country: CountryData[] = dataJson.filter(
     (country: CountryData) => country.name === route
@@ -145,7 +164,19 @@ export const getServerSideProps: GetServerSideProps<{
 
   const data = country[0]
 
-  if (data === undefined) {
+  const borderCountries: CountryData[] = dataJson.filter(
+    (country: CountryData) => {
+      if (data.borders) {
+        for (let i = 0; i < data.borders.length; i++) {
+          if (country.alpha3Code === data.borders[i]) {
+            return country
+          }
+        }
+      }
+    }
+  )
+
+  if (data === undefined || borderCountries === undefined) {
     return {
       notFound: true
     }
@@ -153,7 +184,8 @@ export const getServerSideProps: GetServerSideProps<{
 
   return {
     props: {
-      data
+      data,
+      borderCountries
     }
   }
 }
