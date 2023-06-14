@@ -165,7 +165,7 @@ export const getServerSideProps: GetServerSideProps<{
 
   const borderCountries: CountryData[] = dataJson.filter(
     (country: CountryData) => {
-      if (data.borders) {
+      if (data?.borders) {
         for (let i = 0; i < data.borders.length; i++) {
           if (country.alpha3Code === data.borders[i]) {
             return country
@@ -175,7 +175,7 @@ export const getServerSideProps: GetServerSideProps<{
     }
   )
 
-  if (data === undefined || borderCountries === undefined) {
+  if (data === undefined || borderCountries === undefined || data === null) {
     return {
       notFound: true
     }
