@@ -17,13 +17,9 @@ const Navbar = () => {
 
   return (
     <S.HeaderStyled darkmode={darkMode.toString()}>
-      <S.NavbarStyled
-        className="container"
-        onClick={handleToggleTheme}
-        darkmode={darkMode.toString()}
-      >
+      <S.NavbarStyled className="container" darkmode={darkMode.toString()}>
         <h1>Where in the world?</h1>
-        <S.ThemeToggleContainer>
+        <S.ThemeToggleContainer onClick={handleToggleTheme}>
           {darkMode ? (
             <Image src={darkModeIm} alt="moon icon" width={15} height={13.75} />
           ) : (
