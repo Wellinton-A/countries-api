@@ -161,25 +161,9 @@ export const getServerSideProps: GetServerSideProps<{
   const jsonString: string = jsonData.toString('utf8')
   const dataJson: CountryData[] = JSON.parse(jsonString)
 
-  const country: CountryData[] = []
-
-  const countryFunction = () => {
-    if (dataJson) {
-      for (let i = 0; i < dataJson.length; i++) {
-        if (dataJson[i].name === route) {
-          country.push(dataJson[i])
-        }
-      }
-    } else {
-      return null
-    }
-  }
-
-  countryFunction()
-
-  // const country: CountryData[] = dataJson.filter(
-  //   (country: CountryData) => country.name === route
-  // )
+  const country: CountryData[] = dataJson.filter(
+    (country: CountryData) => country.name === route
+  )
 
   const data = country[0]
 
