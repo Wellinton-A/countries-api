@@ -14,9 +14,6 @@ import arrowLeftDark from '../assets/icons8-left-arrow-white50.png'
 import GlobalStyle from '@/styles/GlobalStyle'
 import * as S from '../styles/style'
 
-import path from 'path'
-import fs from 'fs/promises'
-import process from 'process'
 import { getLocalData } from '@/utils/ultils'
 
 type Props = {
