@@ -17,6 +17,7 @@ import * as S from '../styles/style'
 import path from 'path'
 import fs from 'fs/promises'
 import process from 'process'
+import { getLocalData } from '@/utils/ultils'
 
 type Props = {
   data: CountryData
@@ -156,10 +157,7 @@ export const getServerSideProps: GetServerSideProps<{
   const params = context.params as ParsedUrlQuery
   const route = params.name
 
-  const filePath = path.join(process.cwd(), 'data', 'data.json')
-  const jsonData = await fs.readFile(filePath)
-  const jsonString: string = jsonData.toString('utf8')
-  const dataJson: CountryData[] = JSON.parse(jsonString)
+  const dataJson: CountryData[] = await getLocalData()
 
   const country: CountryData[] = dataJson.filter(
     (country: CountryData) => country.name === route

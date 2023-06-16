@@ -13,10 +13,7 @@ import arrowDownDark from '../assets/icons8-down-white24.png'
 
 import * as S from '@/styles/style'
 import Card from '@/components/Country-Card'
-
-import path from 'path'
-import fs from 'fs/promises'
-import process from 'process'
+import { getLocalData } from '@/utils/ultils'
 
 export const font = "'Nunito Sans', sans-serif"
 
@@ -174,10 +171,7 @@ const Home = ({ countries }: Props) => {
 export default Home
 
 export const getStaticProps = async () => {
-  const filePath = path.join(process.cwd(), 'data', 'data.json')
-  const jsonData = await fs.readFile(filePath)
-  const jsonString: string = jsonData.toString('utf8')
-  const data = JSON.parse(jsonString)
+  const data: CountryData[] = await getLocalData()
 
   return {
     props: {
