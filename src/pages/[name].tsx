@@ -48,9 +48,10 @@ const CountrySDetails = ({ data, borderCountries }: Props) => {
   useEffect(() => {
     setBorders([])
     if (borderCountries) {
-      setBorders(borderCountries.map(bord => bord.name))
+      setBorders(borderCountries.map((bord) => bord.name))
       console.log(borders)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [borderCountries])
 
   return (
