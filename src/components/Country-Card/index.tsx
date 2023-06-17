@@ -5,13 +5,15 @@ import { DarkModeContext } from '@/context/darkMode.context'
 import Image from 'next/image'
 
 type Props = {
-  country: any
+  country: CountryData
 }
 
 const Card = ({ country }: Props) => {
   const { darkMode } = useContext(DarkModeContext)
 
-  const route = country.name.common
+  const { population, name, region, capital, flags } = country
+
+  const route = name
 
   return (
     <CardContainer
@@ -19,26 +21,19 @@ const Card = ({ country }: Props) => {
       title="Click to see more details about the country"
       darkmode={darkMode.toString()}
     >
-      <Image
-        width={264}
-        height={160}
-        src={country.flags.png}
-        alt={`${country.flag.alt}`}
-      />
+      <Image width={264} height={160} src={flags.png} alt={`${name} flag`} />
       <InfoContainer>
         <div>
-          <h3>{country.name.common}</h3>
+          <h3>{name}</h3>
           <span suppressHydrationWarning>
             Population:{' '}
-            <span suppressHydrationWarning>
-              {country.population.toLocaleString()}
-            </span>
+            <span suppressHydrationWarning>{population.toLocaleString()}</span>
           </span>
           <span suppressHydrationWarning>
-            Region: <span suppressHydrationWarning>{country.region}</span>
+            Region: <span suppressHydrationWarning>{region}</span>
           </span>
           <span suppressHydrationWarning>
-            Capital: <span suppressHydrationWarning>{country.capital}</span>
+            Capital: <span suppressHydrationWarning>{capital}</span>
           </span>
         </div>
       </InfoContainer>
