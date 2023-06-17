@@ -2,7 +2,6 @@ import { useContext } from 'react'
 import { CardContainer, InfoContainer } from './style'
 import { DarkModeContext } from '@/context/darkMode.context'
 
-import { CountryData } from '@/pages'
 import Image from 'next/image'
 
 type Props = {

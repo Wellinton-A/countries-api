@@ -6,7 +6,7 @@ import { GetServerSideProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 
 import { DarkModeContext } from '@/context/darkMode.context'
-import { CountryData, font } from '.'
+import { font } from '.'
 
 import arrowLeftLight from '../assets/icons8-left-arrow-black50.png'
 import arrowLeftDark from '../assets/icons8-left-arrow-white50.png'
