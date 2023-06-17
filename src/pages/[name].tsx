@@ -53,19 +53,6 @@ const CountrySDetails = ({ data, borderCountries }: Props) => {
     }
   }, [borderCountries])
 
-  const bordRoute = (bord: string): string | undefined => {
-    if (borderCountries) {
-      for (let i = 0; i < borderCountries.length; i++) {
-        if (borderCountries[i].alpha3Code === bord) {
-          return borderCountries[i].name
-        }
-      }
-    }
-  }
-
-  console.log(borderCountries)
-  console.log(borders)
-
   return (
     <>
       <GlobalStyle darkmode={darkMode.toString()} font={font} />
