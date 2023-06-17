@@ -13,48 +13,19 @@ import arrowDownDark from '../assets/icons8-down-white24.png'
 
 import * as S from '@/styles/style'
 import Card from '@/components/Country-Card'
-import { getLocalData } from '@/utils/ultils'
+import { fethcAllData } from '@/utils/ultils'
 
 export const font = "'Nunito Sans', sans-serif"
 
-export type CountryData = {
-  name: string
-  nativeName: string
-  region: string
-  subregion: string
-  capital: string
-  population: number
-  topLevelDomain: string[]
-  currencies: [
-    {
-      code: string
-      name: string
-      symbol: string
-    }
-  ]
-  languages: [
-    {
-      name: string
-    }
-  ]
-  borders: string[]
-  flags: {
-    svg: string
-    png: string
-  }
-  alpha3Code: string
-}
-
 type Props = {
-  countries: CountryData[]
+  countries: []
 }
 
 const Home = ({ countries }: Props) => {
   const [filter, setFilter] = useState<string>('')
   const [regionFilter, setRegionFilter] = useState<string>('')
   const [selectToggle, setSelectToggle] = useState<boolean>(false)
-  const [displayCountries, setDispayCountries] =
-    useState<CountryData[]>(countries)
+  const [displayCountries, setDispayCountries] = useState<[]>(countries)
 
   const { darkMode } = useContext(DarkModeContext)
 
@@ -73,15 +44,15 @@ const Home = ({ countries }: Props) => {
 
   useEffect(() => {
     if (filter !== '') {
-      const filteredCountries = countries.filter((country) =>
-        country.name.toLowerCase().match(filter.toLowerCase())
+      const filteredCountries: any = countries.filter((country: any) =>
+        country.name.common.toLowerCase().match(filter.toLowerCase())
       )
       setDispayCountries(filteredCountries)
     } else {
       setDispayCountries(countries)
     }
     if (regionFilter !== '' && filter === '') {
-      const filteredCountries = countries.filter((country) =>
+      const filteredCountries: any = countries.filter((country: any) =>
         country.region.toLowerCase().match(regionFilter.toLowerCase())
       )
       setDispayCountries(filteredCountries)
@@ -158,8 +129,8 @@ const Home = ({ countries }: Props) => {
             </S.FilterByRegionContainer>
           </S.FiltersContainerPrincipal>
           <S.AllCardContainer>
-            {displayCountries.map((country: CountryData) => (
-              <Card key={country.name} country={country} />
+            {displayCountries.map((country: any) => (
+              <Card key={country.name.common} country={country} />
             ))}
           </S.AllCardContainer>
         </div>
@@ -171,7 +142,7 @@ const Home = ({ countries }: Props) => {
 export default Home
 
 export const getStaticProps = async () => {
-  const data: CountryData[] = await getLocalData()
+  const data = await fethcAllData()
 
   return {
     props: {

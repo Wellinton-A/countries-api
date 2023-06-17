@@ -1,12 +1,11 @@
-import { useContext, useEffect, useState } from 'react'
+import { use, useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/image'
-import { GetServerSideProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 
 import { DarkModeContext } from '@/context/darkMode.context'
-import { CountryData, font } from '.'
+import { font } from '.'
 
 import arrowLeftLight from '../assets/icons8-left-arrow-black50.png'
 import arrowLeftDark from '../assets/icons8-left-arrow-white50.png'
@@ -14,46 +13,68 @@ import arrowLeftDark from '../assets/icons8-left-arrow-white50.png'
 import GlobalStyle from '@/styles/GlobalStyle'
 import * as S from '../styles/style'
 
-import { getLocalData } from '@/utils/ultils'
+import { fetchDataByCode, fetchDataByName } from '@/utils/ultils'
 
 type Props = {
-  data: CountryData
-  borderCountries: CountryData[] | null
+  data: any
 }
 
-const CountrySDetails = ({ data, borderCountries }: Props) => {
+const CountrySDetails = ({ data }: Props) => {
   const [route, setRoute] = useState<string | string[] | undefined>()
   const { darkMode } = useContext(DarkModeContext)
-  const {
-    name,
-    nativeName,
-    region,
-    subregion,
-    capital,
-    population,
-    topLevelDomain,
-    currencies,
-    languages,
-    borders,
-    flags
-  } = data
+  const [borders, setBorders] = useState<any[]>([])
+  const [borderCountries, setBorderCountries] = useState<[]>([])
 
   const router = useRouter()
   const routeName = router.query.name
 
+  let lang = ''
+  for (const key in data.nativeName) {
+    lang = key
+    break
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      if (data.borders) {
+        const response: [] = await fetchDataByCode(data.borders)
+        setBorderCountries(response)
+      }
+    }
+
+    fetchData()
+  }, [data])
+
+  useEffect(() => {
+    const bord: any[] = []
+    if (data.borders) {
+      borderCountries?.forEach((count: any) => {
+        bord.push(count.name.common)
+      })
+    }
+
+    setBorders(bord)
+  }, [borderCountries])
+
+  let currency = ''
+  for (const key in data.currencies) {
+    currency = key
+    break
+  }
+
+  const getLanguages = () => {
+    const langs = []
+
+    for (const key in data.languages) {
+      langs.push(key)
+    }
+
+    return langs.map((item) => <span key={item}>{data.languages[item]}, </span>)
+  }
+
   useEffect(() => {
     setRoute(routeName)
   }, [routeName])
-
-  const bordRoute = (bord: string): string | undefined => {
-    if (borderCountries) {
-      for (let i = 0; i < borderCountries.length; i++) {
-        if (borderCountries[i].alpha3Code === bord) {
-          return borderCountries[i].name
-        }
-      }
-    }
-  }
 
   return (
     <>
@@ -80,56 +101,55 @@ const CountrySDetails = ({ data, borderCountries }: Props) => {
               width={560}
               height={400}
               sizes="(max-width: 767px) 320px, 229px"
-              src={flags.png}
-              alt={`${name} flag`}
+              src={data.flags.png}
+              alt={`${data.flags.alt}`}
             />
             <S.ContainerDetails>
-              <h3>{name}</h3>
+              <h3>{data.name.common}</h3>
               <S.MinDetails>
                 <S.Details>
                   <span>
-                    Native Name: <span>{nativeName}</span>
+                    Native Name:{' '}
+                    <span>
+                      {data.name.nativeName
+                        ? `${data.name.nativeName[lang]}`
+                        : 'none'}
+                    </span>
                   </span>
                   <span>
                     Population:{' '}
-                    <span>{population.toLocaleString('en-US')}</span>
+                    <span>{data.population.toLocaleString('en-US')}</span>
                   </span>
                   <span>
-                    Region: <span>{region}</span>
+                    Region: <span>{data.region}</span>
                   </span>
                   <span>
-                    Sub Region: <span>{subregion}</span>
+                    Sub Region: <span>{data.subregion}</span>
                   </span>
                   <span>
-                    Capital: <span>{capital}</span>
+                    Capital: <span>{data.capital}</span>
                   </span>
                 </S.Details>
                 <S.Details>
                   <span>
-                    Top Level Domain:{' '}
-                    {topLevelDomain?.map((domain: string) => (
-                      <span key={domain}>{domain}</span>
-                    ))}
+                    Top Level Domain: <span>{data.tld}</span>
                   </span>
                   <span>
                     Currencies:{' '}
-                    {currencies?.map((curr) => (
-                      <span key={curr.code}>{curr.name}</span>
-                    ))}
+                    <span>
+                      {data.currencies
+                        ? data.currencies[currency].name
+                        : 'None'}
+                    </span>
                   </span>
-                  <span>
-                    Languages:{' '}
-                    {languages?.map((lang) => (
-                      <span key={lang.name}>{lang.name}</span>
-                    ))}
-                  </span>
+                  <span>Languages: {getLanguages()}</span>
                 </S.Details>
               </S.MinDetails>
               <S.BorderCountriesContainer darkmode={darkMode.toString()}>
                 <h4>Border Countries:</h4>
                 {borders?.map((bord) => (
                   <S.LinkBorder
-                    href={`/${bordRoute(bord)}`}
+                    href={`/${bord}`}
                     darkmode={darkMode.toString()}
                     key={bord}
                   >
@@ -147,34 +167,19 @@ const CountrySDetails = ({ data, borderCountries }: Props) => {
 
 export default CountrySDetails
 
-export const getServerSideProps: GetServerSideProps<{
-  data: CountryData
-  borderCountries: CountryData[]
-}> = async (context) => {
+export const getServerSideProps = async (context: any) => {
   const params = context.params as ParsedUrlQuery
-  const route = params.name
+  const route = params.name as string
 
-  const dataJson: CountryData[] = await getLocalData()
+  const dataJson = await fetchDataByName(route)
 
-  const country: CountryData[] = dataJson.filter(
-    (country: CountryData) => country.name === route
+  const country = dataJson.filter(
+    (country: any) => country.name.common === route
   )
 
   const data = country[0]
 
-  const borderCountries: CountryData[] = dataJson.filter(
-    (country: CountryData) => {
-      if (data?.borders) {
-        for (let i = 0; i < data.borders.length; i++) {
-          if (country.alpha3Code === data.borders[i]) {
-            return country
-          }
-        }
-      }
-    }
-  )
-
-  if (data === undefined || borderCountries === undefined || data === null) {
+  if (data === undefined || data === null) {
     return {
       notFound: true
     }
@@ -182,8 +187,7 @@ export const getServerSideProps: GetServerSideProps<{
 
   return {
     props: {
-      data,
-      borderCountries
+      data
     }
   }
 }

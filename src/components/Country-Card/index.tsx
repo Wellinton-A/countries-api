@@ -2,19 +2,16 @@ import { useContext } from 'react'
 import { CardContainer, InfoContainer } from './style'
 import { DarkModeContext } from '@/context/darkMode.context'
 
-import { CountryData } from '@/pages'
 import Image from 'next/image'
 
 type Props = {
-  country: CountryData
+  country: any
 }
 
 const Card = ({ country }: Props) => {
   const { darkMode } = useContext(DarkModeContext)
 
-  const { population, name, region, capital, flags } = country
-
-  const route = name
+  const route = country.name.common
 
   return (
     <CardContainer
@@ -22,19 +19,26 @@ const Card = ({ country }: Props) => {
       title="Click to see more details about the country"
       darkmode={darkMode.toString()}
     >
-      <Image width={264} height={160} src={flags.png} alt={`${name} flag`} />
+      <Image
+        width={264}
+        height={160}
+        src={country.flags.png}
+        alt={`${country.flag.alt}`}
+      />
       <InfoContainer>
         <div>
-          <h3>{name}</h3>
+          <h3>{country.name.common}</h3>
           <span suppressHydrationWarning>
             Population:{' '}
-            <span suppressHydrationWarning>{population.toLocaleString()}</span>
+            <span suppressHydrationWarning>
+              {country.population.toLocaleString()}
+            </span>
           </span>
           <span suppressHydrationWarning>
-            Region: <span suppressHydrationWarning>{region}</span>
+            Region: <span suppressHydrationWarning>{country.region}</span>
           </span>
           <span suppressHydrationWarning>
-            Capital: <span suppressHydrationWarning>{capital}</span>
+            Capital: <span suppressHydrationWarning>{country.capital}</span>
           </span>
         </div>
       </InfoContainer>
